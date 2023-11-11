@@ -411,6 +411,9 @@ section.portfolio {
     
         grid-template-columns: repeat(2, 1fr);
     }
+    .imgg{
+        display: none;
+    }
 }
 
 @media (max-width: 450px){
