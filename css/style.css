@@ -369,6 +369,7 @@ section.portfolio {
 
     .home{
         flex-direction: column;
+        margin-top: -5%;
     }
 
     .home-content h3{

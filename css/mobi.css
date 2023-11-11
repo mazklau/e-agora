@@ -984,9 +984,3 @@ section{
 
     }
 }
-@media (max-height: 726px) {
-   .lado{
-    position: relative;
-    left: 43%;
-   }
-}
