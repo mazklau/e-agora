@@ -59,6 +59,9 @@ section {
     font-weight: 600;
     cursor: default;
 }
+.imgg{
+    display: block;
+}
 
 .navbar a {
     font-size: 1.7rem;
@@ -298,7 +301,10 @@ section.portfolio {
     html{
         font-size: 55%;
     }
+   
 }
+
+
 @media (max-width: 991px){
     .header{
         padding: 2rem 3%;
@@ -344,6 +350,10 @@ section.portfolio {
     #menu-icon{
         display: block;
     }
+    .imgg{
+        display: none;
+    }
+
 
     .navbar{
         position: absolute;
@@ -411,9 +421,7 @@ section.portfolio {
     
         grid-template-columns: repeat(2, 1fr);
     }
-    .imgg{
-        display: none;
-    }
+    
 }
 
 @media (max-width: 450px){
@@ -436,9 +444,6 @@ section.portfolio {
         display: block;
         width: 80%;
         margin: auto;
-    }
-    .imgg{
-        display: none;
     }
 
     .footer{
