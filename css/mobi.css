@@ -22,7 +22,7 @@ section{
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 20px;
+    grid-gap: 5px;
     padding: 20px;
     flex: none;
 }
@@ -43,7 +43,6 @@ section{
     display: none;
 }
 .gallery-wrap{
-    width: 97vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,14 +53,14 @@ section{
 #backBtn{
     width: 50px;
     cursor: pointer;
-    margin: 8px;
+    margin: 0;
 
 }
 
 #nextBtn{
     width: 50px;
     cursor: pointer;
-    margin: 39px;
+    margin: 0p;
 }
 
 .gallery div img:hover{
@@ -913,7 +912,7 @@ section{
         width: 100%;
         display: grid;
         grid-template-columns: auto auto auto;
-        grid-gap: 10px;
+        grid-gap: 5px;
         padding: 0px;
         flex: none;
     }
@@ -928,7 +927,7 @@ section{
     .lado{
         
          position: flex;
-         left: 29.5%;
+         left: 59.5%;
 
     }
 }
