@@ -583,7 +583,9 @@ section{
        filter: grayscale(100%);
        transition: transform 0.5s;
     }
-    
+    .imgg{
+        display: none;
+    }
     .lado{
         
          position: flex;
