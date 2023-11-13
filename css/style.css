@@ -233,6 +233,10 @@ section.portfolio {
     border-radius: 22px;
     margin: 15px;
 }
+.portfoli h1{
+    position: relative;
+    top: 10px;
+}
 .portfolio h2{
     margin-bottom: 2.5rem ;
  
