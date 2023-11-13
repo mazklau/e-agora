@@ -142,6 +142,7 @@ span{
     letter-spacing: .1rem;
     font-weight: 600;
     transition: .5 ease;
+    text-align: center;
 }
 
 .btn:hover{
@@ -384,6 +385,7 @@ section.portfolio {
         background: var(--bg-color);
         border: .1rem solid rgba(0, 0, 0, .2);
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2); 
+        text-align: center;
         display: none; 
     }
 
