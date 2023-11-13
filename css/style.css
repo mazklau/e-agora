@@ -224,8 +224,13 @@ span{
 /*______________portifolio_______________*/
 
 section.portfolio {
-    background: var(--bg-color);
+    background: var(--second-bg-color);
     
+}
+.portfoli {
+    background: var(--bg-color);
+    border-radius: 22px;
+    margin: 12px;
 }
 .portfolio h2{
     margin-bottom: 2.5rem ;
