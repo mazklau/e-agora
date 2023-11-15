@@ -68,6 +68,7 @@ section {
     color: var(--text-color);
     margin-left: 4rem;
     transition: .3s;
+    text-align: center;
 }
 .navbar a:hover,
 .navbar a.active{
@@ -130,7 +131,15 @@ span{
     left: 60%;
     top: 12%;
 }
-
+ul > li{
+    display: block;
+    justify-content: center;
+    text-decoration: none;  
+}
+#btn{
+    width: 40%;
+    margin: auto;
+}
 .btn{
     display: inline-flex;
     padding: 1rem 2.8rem;
@@ -385,7 +394,7 @@ section.portfolio {
         background: var(--bg-color);
         border: .1rem solid rgba(0, 0, 0, .2);
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2); 
-        text-align: center;
+        text-align: ce;
         display: none; 
     }
 
