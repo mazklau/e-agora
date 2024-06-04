@@ -99,11 +99,6 @@ section {
 .home-content h3:nth-of-type(2){
     margin-bottom: 2rem;   
 }
-#whatsapp{
-
-   font-size: 3rem;
-   border-radius: 50%;
-}
 span{
     color: var(--main-color);
 }
@@ -131,15 +126,8 @@ span{
     left: 60%;
     top: 12%;
 }
-ul > li{
-    display: block;
-    justify-content: center;
-    text-decoration: none;  
-}
-#btn{
-    width: 40%;
-    margin: auto;
-}
+
+
 .btn{
     display: inline-flex;
     padding: 1rem 2.8rem;
