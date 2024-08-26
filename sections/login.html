@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <form id="loginForm">
+        <input type="text" id="email" placeholder="Email" required>
+        <input type="password" id="pass" placeholder="Senha" required>
+        <button type="submit">Login</button>
+        <a href="cadastro.html"> Faça seu Cadastro</a>
+    </form>
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Impede o envio do formulário padrão
+
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("pass").value;
+
+            fetch('http://localhost:3000/login', {  // URL do seu backend
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            })
+            .then(response => response.json())  // Sempre converte a resposta para JSON
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem('authenticated', 'true'); // Salva o estado de autenticação
+                    window.location.href = 'pagina-in.html'; // Redireciona para a página protegida
+                } else {
+                    alert('Email ou senha inválidos. Você será redirecionado para a página de login.');
+                    window.location.href = 'login.html'; // Redireciona de volta para a página de login
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao fazer login:', error);
+                alert('Erro ao fazer login. Você será redirecionado para a página de login.');
+                window.location.href = 'login.html'; // Redireciona de volta para a página de login
+            });
+        });
+    </script>
+</body>
+</html>

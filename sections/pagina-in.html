@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/pagina.css">
+    <title>Página Protegida</title>
+</head>
+<body>
+    <header>
+        <img src="../img/port/pexels-miguel-á-padriñán-3520694-Photoroom.png" alt="">
+        <h1>InforTec</h1>
+        <nav>
+            <div id="menu-icon">
+                <i class='bx bx-menu'></i>
+                <i class='bx bx-x-circle'></i>
+            </div>
+            <div class="menu-icons">
+                <div><a href=""><i class='bx bxs-home'></i>Home</a></div>
+                <div class="submenu">
+                    <a href="#" id="leptop-menu"><i class='bx bx-wrench'></i>Hardware</a>
+                    <ul class="submenu-list" id="leptop-submenu">
+                        <li><a href="#">Troca de memórias RAM</a></li>
+                        <li><a href="#">Discos rígidos e SSDs</a></li>
+                        <li><a href="#">Substituição de telas e painéis</a></li>
+                        <li><a href="#">Reparo e substituição de placas-mãe</a></li>
+                    </ul>
+                </div>
+                <div class="submenu">
+                    <a href="#" id="windows-menu"><i class='bx bxl-windows'></i>Windows</a>
+                    <ul class="submenu-list" id="windows-submenu">
+                        <li><a href="#">Formatação Windows 10</a></li>
+                        <li><a href="#">Formatação Windows 11</a></li>
+                        <li><a href="#">Recuperação de Sistema</a></li>
+                        <li><a href="#">Instalação de Drivers</a></li>
+                    </ul>
+                </div>
+                <div class="submenu">
+                    <a href="#" id="Software-menu"><i class='bx bx-chip'></i>Software</a>
+                    <ul class="submenu-list" id="Software-submenu">
+                        <li><a href="https://creativecloud.adobe.com/apps/updates" target="_blank" rel="noopener noreferrer">Adobe Photoshop</a></li>
+                        <li><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a></li>
+                        <li><a href="https://github.com/yagoprssantos/Linux-System-Simulator" target="_blank" rel="noopener noreferrer">Sistema Linux</a></li>
+                    </ul>
+                </div>
+                <div class="submenu">
+                    <a href="#" id="tools-menu"><i class='bx bx-cog'></i>Tools</a>
+                    <ul class="submenu-list" id="tools-submenu">
+                        <li><a href="#" id="profile">Perfil</a></li>
+                        <li><a href="#" id="settings">Configuração</a></li>
+                        <li><a href="#" id="logout">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section>
+        <div class="img-cp">
+            <h1 class="text">Computadores <br> & <br> Laptop</h1>
+            <img src="../img/pexels-xxss-is-back-777001.png" alt="">
+            <h1 class="text-h">Escolha o Serviço</h1>
+            <div class="cof-cp">
+                <a href=""><i class='bx bxs-key'><p>Quebra de Senha</p></i></a>
+                <a href=""><i class='bx bx-chip'><p>Software</p></i></a>
+                <a href=""><i class='bx bx-wrench'><p>Hardware</p></i></a>
+                <a href=""><i class='bx bxl-windows'><p>Windows 7, 8.1, 10, 11</p></i></a>
+            </div>
+        </div>
+        <div class="img-lptp">
+            <img src="../img/lenovo-laptops-ideapad-1i-gen-7-14-intel-hero.avif" alt="img" class="imgg">
+            <p class="text-p">Oferecemos serviços completos de troca de peças e manutenção para computadores e notebooks. Nossa equipe de técnicos especializados está pronta para ajudar.</p>
+            <div class="cof-cp">
+                <a href=""><i class='bx bx-battery'><p>Troca de Bateria</p></i></a>
+                <a href=""><i class='bx bx-chip'><p>Software</p></i></a>
+                <a href=""><i class='bx bx-wrench'><p>Hardware</p></i></a>
+                <a href=""><i class='bx bx-laptop'><p>Tela</p></i></a>
+                <a href=""><i class='bx bxl-windows'><p>Windows 7, 8.1, 10, 11</p></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="aria-footer">
+            <h1>CONTATO</h1>
+            <div class="contact">
+                <div class="icons">
+                    <a href="https://api.whatsapp.com/send/?phone=559484357567&text&type=phone_number&app_absent=0"><i class='bx bxl-whatsapp'> (94) 98435-7567</i></a>
+                    <a href="https://www.instagram.com/matheusjv2010/"><i class='bx bxl-instagram-alt'> @matheusjv2010</i></a>
+                    <a href="https://www.linkedin.com/in/matheus-sousa-339428185/"><i class='bx bxl-linkedin'> in/matheus-sousa</i></a>
+                </div>
+                <svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Fundo -->
+                    <rect width="200" height="60" fill="#f0f0f0"/>
+                  
+                    <!-- Texto -->
+                    <text x="30" y="40" font-family="Arial, sans-serif" font-size="36" fill="#333">InforTec</text>
+                  </svg>
+                  
+                  
+            </div>
+        </div>
+    </footer>
+
+    <script src="nav.js"></script>
+    <script>
+        // Verifica se o usuário está autenticado ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('authenticated') !== 'true') {
+                window.location.href = 'login.html'; // Redireciona para a página de login se não autenticado
+            }
+        });
+
+        // Logout
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('authenticated'); // Remove o estado de autenticação
+            window.location.href = 'login.html'; // Redireciona para a página de login após logout
+        });
+    </script>
+</body>
+</html>

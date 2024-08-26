@@ -1,0 +1,115 @@
+/* Definição das variáveis de cores */
+:root {
+    --bg-color: #131324e5;
+    --second-bg-color: #323946;
+    --text-color: #ffffff;
+    --main-color: rgba(46, 200, 209, 0.865);
+    --hover-color: rgba(46, 200, 209, 1);
+    --border-color: rgba(0, 0, 0, 0.2);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+.wrapper {
+    background-color: var(--second-bg-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--shadow-color);
+    width: 400px;
+    color: var(--text-color);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.input-box {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 80%;
+    padding: 10px 40px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.input-box i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--main-color);
+}
+
+.remember-forget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.remember-forget label {
+    cursor: pointer;
+}
+
+.remember-forget a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.remember-forget a:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    background-color: var(--main-color);
+    color: var(--text-color);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--hover-color);
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.register-link a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+}

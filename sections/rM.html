@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviço de Substituição de Memória RAM</title>
+  <style>
+    :root {
+      --bg-color: #131324e5;
+      --second-bg-color: #323946;
+      --text-color: #ffffff;
+      --main-color: rgba(46, 200, 209, 0.865);
+      --hover-color: rgba(46, 200, 209, 1);
+      --border-color: rgba(0, 0, 0, 0.2);
+      --shadow-color: rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: var(--second-bg-color);
+      border-radius: 8px;
+      box-shadow: 0 4px 8px var(--shadow-color);
+    }
+    
+    h1 {
+      color: var(--text-color);
+    }
+    
+    .ram-option {
+      margin: 20px;
+      display: inline-block;
+      text-align: center;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      padding: 15px;
+      background-color: var(--second-bg-color);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    .ram-option input {
+      display: none;
+    }
+    
+    .ram-option label {
+      cursor: pointer;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: var(--second-bg-color);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    .ram-option input:checked + label {
+      background-color: var(--main-color);
+      border-color: var(--main-color);
+    }
+    
+    .ram-option img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    
+    .ram-option p {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+    
+    button {
+      background-color: var(--main-color);
+      color: var(--text-color);
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: var(--hover-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Serviço de Substituição de Memória RAM para Notebooks</h1>
+    <p>Escolha o tipo de memória RAM que você deseja substituir:</p>
+    
+    <div class="ram-option">
+      <input type="radio" id="ddr3c" name="ram-type" value="DDR3c">
+      <label for="ddr3c">
+        <img src="../img/port/5eefa36d96-Photoroom.png" alt="DDR3">
+        <br>DDR3
+        <p>R$20,00</p>
+      </label>
+    </div>
+    
+    <div class="ram-option">
+      <input type="radio" id="ddr4c" name="ram-type" value="DDR4c">
+      <label for="ddr4c">
+        <img src="../img/port/5eefa36d96-Photoroom.png" alt="DDR4">
+        <br>DDR4
+        <p>R$20,00</p>
+      </label>
+    </div>
+    
+    <button type="submit">Confirmar Seleção</button>
+  </div>
+  <div class="container">
+    <h1>Serviço de Substituição de Memória RAM (Computadores de mesa)</h1>
+    <p>Escolha o tipo de memória RAM que você deseja substituir:</p>
+    
+    <div class="ram-option">
+      <input type="radio" id="ddr3" name="ram-type" value="DDR3">
+      <label for="ddr3">
+        <img src="../img/port/memoria_ddr3_4gb_1333mhz_kingston_br_656_1_20170127161152-Photoroom.png" alt="DDR3">
+        <br>DDR3
+        <p>R$20,00</p>
+      </label>
+    </div>
+    
+    <div class="ram-option">
+      <input type="radio" id="ddr4" name="ram-type" value="DDR4">
+      <label for="ddr4">
+        <img src="../img/port/memoria_ddr3_4gb_1333mhz_kingston_br_656_1_20170127161152-Photoroom.png" alt="DDR4">
+        <br>DDR4
+        <p>R$20,00</p>
+      </label>
+    </div>
+    
+    <button type="submit">Confirmar Seleção</button>
+  </div>
+  <script>
+    // Verifica se o usuário está autenticado ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        if (localStorage.getItem('authenticated') !== 'true') {
+            window.location.href = 'login.html'; // Redireciona para a página de login se não autenticado
+        }
+    });
+
+    // Logout
+    document.getElementById('logout').addEventListener('click', () => {
+        localStorage.removeItem('authenticated'); // Remove o estado de autenticação
+        window.location.href = 'login.html'; // Redireciona para a página de login após logout
+    });
+</script>
+</body>
+</html>
