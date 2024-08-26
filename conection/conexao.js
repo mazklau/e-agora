@@ -1,64 +1,73 @@
 const express = require('express');
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise'); // Utilizando a versão promise do mysql2
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Para permitir requisições de outros domínios
 
 const app = express();
-const port = "3000";
+const port = 3000;
 
 app.use(bodyParser.json());
 app.use(cors()); // Permitir requisições do frontend
 
-const conexao = mysql.createConnection({
-    host: "autorack.proxy.rlwy.net",
-    user: "root",
-    port: "45268",
-    password: "XzlrPHlhHzUToVIxdpaftvLculTfJrAi",
-    database: "railway"
-});
-
-conexao.connect((error) => {
-    if (error) {
+// Função para criar a conexão com o banco de dados usando async/await
+async function connectDatabase() {
+    try {
+        const connection = await mysql.createConnection({
+            host: "autorack.proxy.rlwy.net",
+            user: "root",
+            port: "45268",
+            password: "XzlrPHlhHzUToVIxdpaftvLculTfJrAi",
+            database: "railway"
+        });
+        console.log('Conexão estabelecida com sucesso!');
+        return connection;
+    } catch (error) {
         console.error('Erro ao conectar ao banco de dados:', error);
-        return;
+        throw error;
     }
-    console.log('Conexão estabelecida com sucesso!');
-});
+}
 
 // Rota de login
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { email, senha } = req.body;
-    const sql = `SELECT nome, email FROM Cadastros WHERE email = ? AND password = ?`;
+    console.log('Dados recebidos para login:', req.body);
 
-    conexao.query(sql, [email, senha], (err, results) => {
-        if (err) {
-            console.error('Erro ao executar a consulta:', err);
-            return res.status(500).json({ error: 'Erro no servidor' });
-        }
+    try {
+        const connection = await connectDatabase();
+        const sql = `SELECT nome, email FROM Cadastros WHERE email = ? AND password = ?`;
+        const [results] = await connection.execute(sql, [email, senha]);
 
         if (results.length > 0) {
-            // Enviar os dados do usuário no response
             const usuario = results[0];
             res.json({ success: true, user: usuario });
         } else {
             res.status(401).json({ success: false, message: 'Nenhum usuário encontrado com esse email e senha.' });
         }
-    });
+
+        await connection.end(); // Fechar a conexão após a consulta
+    } catch (err) {
+        console.error('Erro ao executar a consulta:', err);
+        res.status(500).json({ error: 'Erro no servidor' });
+    }
 });
 
 // Rota de cadastro
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     const { nome, email, senha, telefone } = req.body;
-    const sql = `INSERT INTO Cadastros (nome, email, password, telefone) VALUES (?, ?, ?, ?)`;
+    console.log('Dados recebidos para registro:', req.body);
 
-    conexao.query(sql, [nome, email, senha, telefone], (err, result) => {
-        if (err) {
-            console.error('Erro ao executar a inserção:', err);
-            return res.status(500).json({ error: 'Erro ao registrar usuário.' });
-        }
+    try {
+        const connection = await connectDatabase();
+        const sql = `INSERT INTO Cadastros (nome, email, password, telefone) VALUES (?, ?, ?, ?)`;
+        const [result] = await connection.execute(sql, [nome, email, senha, telefone]);
 
         res.json({ success: true, message: 'Usuário registrado com sucesso!' });
-    });
+
+        await connection.end(); // Fechar a conexão após a inserção
+    } catch (err) {
+        console.error('Erro ao executar a inserção:', err);
+        res.status(500).json({ error: 'Erro ao registrar usuário.' });
+    }
 });
 
 app.listen(port, () => {
