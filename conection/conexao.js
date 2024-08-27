@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
 
 // Configurações de middlewares
 app.use(bodyParser.json());
@@ -27,8 +26,17 @@ const sequelize = new Sequelize('railway', 'root', 'XzlrPHlhHzUToVIxdpaftvLculTf
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
+    logging: console.log, // Opcional: para verificar queries SQL no console
 });
+
+// Teste de conexão com o banco de dados
+sequelize.authenticate()
+    .then(() => console.log('Conexão com o banco de dados estabelecida com sucesso!'))
+    .catch(err => {
+        console.error('Erro ao conectar ao banco de dados:', err);
+        process.exit(1); // Encerra o processo se a conexão falhar
+    });
 
 // Modelo de Usuário
 const User = sequelize.define('User', {
@@ -54,13 +62,10 @@ const User = sequelize.define('User', {
     timestamps: false
 });
 
-// Teste de conexão com o banco de dados
-sequelize.authenticate()
-    .then(() => console.log('Conexão com o banco de dados estabelecida com sucesso!'))
-    .catch(err => console.error('Erro ao conectar ao banco de dados:', err));
-
 // Sincronização do modelo (somente para desenvolvimento, evite usar 'force: true' em produção)
-sequelize.sync({ force: false });
+sequelize.sync({ force: false })
+    .then(() => console.log('Modelos sincronizados com o banco de dados.'))
+    .catch(err => console.error('Erro ao sincronizar modelos com o banco de dados:', err));
 
 // Validação de entrada com Joi
 const userSchema = Joi.object({
@@ -74,8 +79,9 @@ const userSchema = Joi.object({
 const generateToken = (user) => {
     return jwt.sign({ id: user.id, email: user.email }, 'segredo_super_secreto', { expiresIn: '1h' });
 };
+
 // Rota de cadastro
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     const { error } = userSchema.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 
@@ -99,8 +105,9 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ error: 'Erro ao registrar usuário.' });
     }
 });
+
 // Rota de login
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { email, senha } = req.body;
 
     // Verifica se os dados do usuário estão no cache
@@ -132,6 +139,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor' });
     }
 });
+
 // Middleware de verificação de token JWT
 const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
@@ -149,8 +157,9 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
+
 // Rota de perfil (protegida)
-app.get('/profile', verifyToken, async (req, res) => {
+app.get('/api/profile', verifyToken, async (req, res) => {
     try {
         const user = await User.findByPk(req.userId, { attributes: ['nome', 'email', 'telefone'] });
 
@@ -164,6 +173,6 @@ app.get('/profile', verifyToken, async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor' });
     }
 });
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
-});
+
+// Exporta o aplicativo Express para o Vercel
+module.exports = app;
