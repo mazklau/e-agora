@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Configuração do cache
-const cache = new NodeCache({ stdTTL: 600 });
+const cache = new NodeCache({ stdTTL: 600 }); // Cache padrão de 10 minutos
 
 // Configuração do Sequelize para MySQL
 const sequelize = new Sequelize('railway', 'root', 'XzlrPHlhHzUToVIxdpaftvLculTfJrAi', {
@@ -26,8 +26,17 @@ const sequelize = new Sequelize('railway', 'root', 'XzlrPHlhHzUToVIxdpaftvLculTf
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
+    logging: console.log, // Opcional: para verificar queries SQL no console
 });
+
+// Teste de conexão com o banco de dados
+sequelize.authenticate()
+    .then(() => console.log('Conexão com o banco de dados estabelecida com sucesso!'))
+    .catch(err => {
+        console.error('Erro ao conectar ao banco de dados:', err);
+        process.exit(1); // Encerra o processo se a conexão falhar
+    });
 
 // Modelo de Usuário
 const User = sequelize.define('User', {
@@ -53,13 +62,10 @@ const User = sequelize.define('User', {
     timestamps: false
 });
 
-// Teste de conexão com o banco de dados
-sequelize.authenticate()
-    .then(() => console.log('Conexão com o banco de dados estabelecida com sucesso!'))
-    .catch(err => console.error('Erro ao conectar ao banco de dados:', err));
-
 // Sincronização do modelo (somente para desenvolvimento, evite usar 'force: true' em produção)
-sequelize.sync({ force: false });
+sequelize.sync({ force: false })
+    .then(() => console.log('Modelos sincronizados com o banco de dados.'))
+    .catch(err => console.error('Erro ao sincronizar modelos com o banco de dados:', err));
 
 // Validação de entrada com Joi
 const userSchema = Joi.object({
@@ -104,6 +110,7 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     const { email, senha } = req.body;
 
+    // Verifica se os dados do usuário estão no cache
     const cachedUser = cache.get(email);
     if (cachedUser) {
         return res.json({ success: true, token: generateToken(cachedUser), user: cachedUser });
@@ -122,6 +129,7 @@ app.post('/api/login', async (req, res) => {
             return res.status(401).json({ success: false, message: 'Senha incorreta.' });
         }
 
+        // Armazena o usuário no cache
         cache.set(email, user);
 
         const token = generateToken(user);
