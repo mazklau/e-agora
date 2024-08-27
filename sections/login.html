@@ -15,35 +15,14 @@
     </form>
     
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();  // Impede o envio do formulário padrão
-    
-            const email = document.getElementById("email").value;
-            const senha = document.getElementById("pass").value;
-       
-            fetch('https://e-agora.vercel.app/sections/pagina-in.html', {  // URL do seu backend na Vercel
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, senha })
-            })
-            .then(response => response.json())  // Sempre converte a resposta para JSON
-            .then(data => {
-                if (data.success) {
-                    localStorage.setItem('authenticated', 'true'); // Salva o estado de autenticação
-                    window.location.href = 'pagina-in.html'; // Redireciona para a página protegida
-                } else {
-                    alert('Email ou senha inválidos. Você será redirecionado para a página de login.');
-                    window.location.href = 'login.html'; // Redireciona de volta para a página de login
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao fazer login:', error);
-                alert('Erro ao fazer login. Você será redirecionado para a página de login.');
-                window.location.href = 'login.html'; // Redireciona de volta para a página de login
-            });
-        });
+    fetch('https://seu-dominio-vercel.vercel.app/api/login', {  // Corrige a URL para /api/login
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, senha })
+})
+
     </script>
     
 </body>

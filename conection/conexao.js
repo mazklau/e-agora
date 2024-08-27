@@ -8,14 +8,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 3000;
 
 // Configurações de middlewares
 app.use(bodyParser.json());
 app.use(cors());
 
 // Configuração do cache
-const cache = new NodeCache({ stdTTL: 600 }); // Cache padrão de 10 minutos
+const cache = new NodeCache({ stdTTL: 600 });
 
 // Configuração do Sequelize para MySQL
 const sequelize = new Sequelize('railway', 'root', 'XzlrPHlhHzUToVIxdpaftvLculTfJrAi', {
@@ -74,8 +73,9 @@ const userSchema = Joi.object({
 const generateToken = (user) => {
     return jwt.sign({ id: user.id, email: user.email }, 'segredo_super_secreto', { expiresIn: '1h' });
 };
+
 // Rota de cadastro
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
     const { error } = userSchema.validate(req.body);
     if (error) return res.status(400).json({ error: error.details[0].message });
 
@@ -99,11 +99,11 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ error: 'Erro ao registrar usuário.' });
     }
 });
+
 // Rota de login
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     const { email, senha } = req.body;
 
-    // Verifica se os dados do usuário estão no cache
     const cachedUser = cache.get(email);
     if (cachedUser) {
         return res.json({ success: true, token: generateToken(cachedUser), user: cachedUser });
@@ -122,7 +122,6 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ success: false, message: 'Senha incorreta.' });
         }
 
-        // Armazena o usuário no cache
         cache.set(email, user);
 
         const token = generateToken(user);
@@ -132,6 +131,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor' });
     }
 });
+
 // Middleware de verificação de token JWT
 const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
@@ -149,8 +149,9 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
+
 // Rota de perfil (protegida)
-app.get('/profile', verifyToken, async (req, res) => {
+app.get('/api/profile', verifyToken, async (req, res) => {
     try {
         const user = await User.findByPk(req.userId, { attributes: ['nome', 'email', 'telefone'] });
 
@@ -164,6 +165,6 @@ app.get('/profile', verifyToken, async (req, res) => {
         res.status(500).json({ error: 'Erro no servidor' });
     }
 });
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
-});
+
+// Exporta o aplicativo Express para o Vercel
+module.exports = app;
