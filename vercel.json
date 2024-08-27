@@ -1,9 +1,11 @@
 {
     "version": 2,
     "builds": [
-      { "src": "index.js", "use": "@vercel/node" }
+      { "src": "conection/conexao.js",
+       "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "index.js" }
+      {   "src": "/api/(.*)", 
+      "dest": "conection/conexao.js"  }
     ]
   }
