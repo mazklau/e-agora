@@ -1,11 +1,8 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "conection/conexao.js",
-       "use": "@vercel/node" }
-    ],
-    "routes": [
-      {   "src": "/api/(.*)", 
-      "dest": "conection/conexao.js"  }
-    ]
-  }
+  "source": "/feedback/(?!general)",
+  "destination": "/api/feedback/general"
+}
+{
+  "source": "/feedback/((?!general).*)",
+  "destination": "/api/feedback/general"
+}
