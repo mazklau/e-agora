@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql2/promise'); // Utilizando a versão promise do mysql2
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Para permitir requisições de outros domínios
-
+const NodeCache = require('node-cache'); // Biblioteca de cache
 const app = express();
 const port = 3000;
 
@@ -13,11 +13,11 @@ app.use(cors()); // Permitir requisições do frontend
 async function connectDatabase() {
     try {
         const connection = await mysql.createConnection({
-            host: process.env.DB_HOST,
-            user: process.env.DB_USER,
-            port: process.env.DB_PORT,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
+            host: "autorack.proxy.rlwy.net",
+            user: "root",
+            port: "45268",
+            password: "XzlrPHlhHzUToVIxdpaftvLculTfJrAi",
+            database: "railway"
         });
         console.log('Conexão estabelecida com sucesso!');
         return connection;
